@@ -1,0 +1,10 @@
+canvas {
+  border : 1px solid;
+}
+    
+#speed-btn {
+  display: block;
+  margin-bottom: 5px;
+} 
+
+
