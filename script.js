@@ -1,7 +1,3 @@
-
-// To do: need fix setTimeout and intersect
-
-
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
 
@@ -37,8 +33,8 @@ class Game {
 }
 
 class Square extends Game {
-  constructor(x, y, width, height, speed, yDelta) {
-    super(x, y, width, height, speed, 0, yDelta);
+  constructor(x, y, width, height, speed) {
+    super(x, y, width, height, speed, 0, random(1, 3));
 
       this._color = `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`;
   }
@@ -52,23 +48,11 @@ class Square extends Game {
     })
   };
   
-  squareBeginMove(array, callback) { 
-    return callback(array.forEach((value, index)=> {
-      if(index % 2 === 0) {
-        setTimeout(function(){
-          value = random(1, 3)
-        }, 5000)
-      } else {
-        setTimeout(function(){
-          value = random(1, 3)
-          }, 100)}
-    }))
-  };
-  
   update() {
     this._y += this._yDelta;
     this._y += (this._yDelta * data.speedGame); 
 
+     // todo: need fix scoreRect
     if (this._y + this._height === canvas.height) {
       data.scoreRect -= 1;
     }
@@ -79,7 +63,6 @@ class Square extends Game {
 }
 
 class Rectangle extends Game {
-    
   update() {    
     this._x += this._xDelta;
 
@@ -104,12 +87,19 @@ class Rectangle extends Game {
   }  
 }
 
+function getSquaresList(count) {
+  return new Array(count).fill(1).map((value, index) => new Square(20 + 60 * index, 0, 25, 25, 1));
+}
+
 function getStartGameData() {
+  setTimeout(() => {
+    data.quadrates.push(...getSquaresList(3));
+  }, 10000);
   return {
-    quadrates: new Array(10).fill(1).map((value, index) => new Square(10 + 30 * index, 0, 20, 20, 1, squareBeginMove(quadrates, function(result){}))),
-    rectangle: new Rectangle(150, canvas.height - 20, 150, 60, 6, 1),
+    quadrates: getSquaresList(5),
+    rectangle: new Rectangle(190, canvas.height - 20, 200, 60, 6, 1),
     gameOver: false,
-    scoreRect: 5,
+    scoreRect: 10,
     speedGame: 1
   }
 }
@@ -126,9 +116,9 @@ function update() {
   data.quadrates.forEach((quadrate) => {
     quadrate.update();
 
-      if (intersect(quadrate, data.rectangle)) {
-        this._yDelta = -1 * Math.abs(this._yDelta); 
-      } 
+    if (intersect(quadrate, data.rectangle)) {
+      quadrate._yDelta = -1 * Math.abs(quadrate._yDelta); 
+    }
   }); 
 
   data.rectangle.update();
