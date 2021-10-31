@@ -1,3 +1,4 @@
+
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
 
@@ -52,8 +53,7 @@ class Square extends Game {
     this._y += this._yDelta;
     this._y += (this._yDelta * data.speedGame); 
 
-     // todo: need fix scoreRect
-    if (this._y + this._height === canvas.height) {
+    if (this._y + this._height >= canvas.height) {
       data.scoreRect -= 1;
     }
     if (this._y + this._height > canvas.height || this._y < 0) {

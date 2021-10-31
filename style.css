@@ -1,10 +1,25 @@
+.container{
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
 canvas {
   border : 1px solid;
 }
     
 #speed-btn {
-  display: block;
+  margin-top: 10px;
+  margin-right: 345px;
   margin-bottom: 5px;
 } 
-
+#new-game-btn {
+  margin-top: 10px;
+  margin-right: 320px;
+}
+#score {
+  margin-top: 10px;
+  margin-right: 340px;
+}
 
