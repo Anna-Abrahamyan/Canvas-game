@@ -13,7 +13,6 @@ audio.src = "http://www.slspencer.com/Sounds/Local/Local.mp3";
 const gameOverBgImg = document.createElement("img");
 gameOverBgImg.src = "https://i.pinimg.com/originals/a1/0e/35/a10e3580c6f8271f5e9b85994573a19b.png";
 
-
 let data = {};
 
 class Game {
